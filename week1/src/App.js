@@ -1,29 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
-function App() {
+// Цель: каждую секунду обновлять значение таймера
+
+export default function Timer() {
+  const [seconds, setSeconds] = useState(0);
+  // const [counter, setCounter] = useState(0);
+
+
+  // useEffect(() => {
+  //   //..
+  // }, []) // пустой [] работает при монтировании компонента
+  // useEffect(() => {
+  //   //..
+  // }, [seconds]) // работает при изменении переменой seconds (может быть несколько переменных)
+  // useEffect(() => {
+  //   //..
+  //   // return () => {}... - сделать чтото при размонтировании
+  // }, [seconds]) // работает при изменении переменой seconds (может быть несколько переменных)
+
+  useEffect(() => {
+    //тайме
+    // создать интервал выполнениня функции, 1000 === 1секунда - через какое время будет повторный вызов (в милисекундах)
+    const timer = setInterval(
+      () => {
+      setSeconds((prevValue) => prevValue + 1)
+    }, 1000)
+  //                                 (аргументы, значения) => {
+  //                                    тело функции
+  //                                 } - функция, короткая запись
+    return () => clearInterval(timer) // при размонтировании удалить таймер
+  }, []); // [] — только один раз при монтировании
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React with Zahar
-          sjksjdjdslj
-          qwe
-        </a>
+    <div>
+      {/*<h2>Секунд прошло: {seconds}</h2>*/}
+      {/*<button onClick={() => {*/}
+      {/*  setSeconds(seconds + 1)*/}
+      {/*}}>*/}
+      {/*  клик*/}
+      {/*</button>*/}
+      {/*<h2>Счетчик {counter}</h2>*/}
+      {/*<button onClick={() => {*/}
+      {/*  setCounter(counter + 4)*/}
+      {/*}}>*/}
+      {/*  клик2*/}
+      {/*</button>*/}
 
-        asd
-      </header>
+      <h2>Секунд прошло: {seconds}</h2>
     </div>
   );
 }
-
-export default App;
